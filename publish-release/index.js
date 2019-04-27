@@ -30,18 +30,26 @@ Toolkit.run(async tools => {
       changelog.push(line);
     }
   }
-  changelog = changelog.length > 0 ?  `Changelog:\n${changelog.join('\n')}` : '';
-  if (changelog !== '') {
-    tools.log.debug(`Extracted changelog: ${changelog}`);
+  const formattedChangelog = changelog.length > 0 ?  `Changelog:\n${changelog.join('\n')}` : '';
+  if (formattedChangelog !== '') {
+    tools.log.debug(`Extracted changelog: ${formattedChangelog}`);
   } else {
     tools.log.debug(`Could not extract a changelog!`);
   }
-  await tools.github.repos.createRelease({
+  const result = await tools.github.repos.createRelease({
     ...tools.context.repo,
     tag_name: releasedVersion,
     name: name,
-    body: changelog,
+    body: formattedChangelog,
   });
   tools.log.info(`Successfully created a release for ${name}`);
+  tools.store.set('meta', {
+    releasedVersion,
+    projectName,
+    name,
+    changelog,
+    releaseUrl: result.url,
+    createdAt: result.created_at,
+  });
   tools.exit.success();
 });

@@ -1,0 +1,12 @@
+{
+  "name": "post-release-in-discord",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "dependencies": {
+    "actions-toolkit": "^2.0.0",
+    "discord.js": "^11.4.2"
+  }
+}
