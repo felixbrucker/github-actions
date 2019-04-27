@@ -3,6 +3,7 @@ const { Toolkit } = require('actions-toolkit');
 Toolkit.run(async tools => {
   const releasedVersion = tools.context.ref;
   const projectName = tools.getFile('README.md').split('\n')[0];
+  tools.log(`Creating a release for ${projectName} ${releasedVersion}`);
   const semVerRegex = /^[0-9]+.[0-9]+.[0-9]+/;
   const changelogFile = tools.getFile('CHANGELOG.md');
   const changelogLines = changelogFile.split('\n');
