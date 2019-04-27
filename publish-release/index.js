@@ -51,5 +51,6 @@ Toolkit.run(async tools => {
     releaseUrl: result.html_url,
     createdAt: result.published_at,
   });
+  tools.log.debug(JSON.stringify(result, null, 2));
   tools.exit.success();
 });
