@@ -5,7 +5,7 @@ Toolkit.run(async tools => {
   const semVerRegexStart = /^([0-9]+.[0-9]+.[0-9]+)/;
   const releasedVersion = tools.context.ref.match(semVerRegex)[1];
   const projectName = tools.getFile('README.md').split('\n')[0];
-  tools.log(`Creating a release for ${projectName} ${releasedVersion}`);
+  tools.log.info(`Creating a release for ${projectName} ${releasedVersion}`);
   const changelogFile = tools.getFile('CHANGELOG.md');
   const changelogLines = changelogFile.split('\n');
   let changelog = [];
@@ -23,11 +23,15 @@ Toolkit.run(async tools => {
     }
   }
   changelog = changelog.length > 0 ?  `Changelog:\n${changelog.join('\n')}` : '';
+  if (changelog !== '') {
+    tools.log.debug(`Extracted changelog: ${changelog}`);
+  }
   await tools.github.repos.createRelease({
     ...tools.context.repo,
     tag_name: releasedVersion,
     name: `${projectName} ${releasedVersion}`,
     body: changelog,
   });
+  tools.log.info(`Successfully created a release for ${projectName} ${releasedVersion}`);
   tools.exit.success();
 });
