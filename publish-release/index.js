@@ -48,8 +48,8 @@ Toolkit.run(async tools => {
     projectName,
     name,
     changelog,
-    releaseUrl: result.url,
-    createdAt: result.created_at,
+    releaseUrl: result.html_url,
+    createdAt: result.published_at,
   });
   tools.exit.success();
 });

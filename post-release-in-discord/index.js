@@ -14,11 +14,6 @@ Toolkit.run(async tools => {
     footer: {
       text: 'Released',
     },
-    author: {
-      name: tools.arguments.authorName,
-      url: tools.arguments.authorUrl,
-      icon: tools.arguments.authorIcon,
-    },
   };
   if (meta.changelog.length > 0) {
     richEmbedConfig.fields = [{
