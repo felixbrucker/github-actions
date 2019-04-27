@@ -4,7 +4,7 @@ FROM node:alpine
 LABEL "com.github.actions.name"="Post release in Discord"
 LABEL "com.github.actions.description"="Post a release to Discord"
 # Here are all of the available icons: https://feathericons.com/
-LABEL "com.github.actions.icon"="package"
+LABEL "com.github.actions.icon"="message-square"
 # And all of the available colors: https://developer.github.com/actions/creating-github-actions/creating-a-docker-container/#label
 LABEL "com.github.actions.color"="gray-dark"
 

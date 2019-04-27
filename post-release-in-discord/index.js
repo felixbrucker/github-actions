@@ -28,7 +28,7 @@ Toolkit.run(async tools => {
   }
   const hook = new Discord.WebhookClient(process.env.WEBHOOK_ID, process.env.WEBHOOK_TOKEN);
 
-  await hook.send('', new Discord.RichEmbed(richEmbedConfig);
+  await hook.send('', new Discord.RichEmbed(richEmbedConfig));
 
   tools.exit.success();
 });
