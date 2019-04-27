@@ -6,15 +6,9 @@ Toolkit.run(async tools => {
   if (!meta) {
     tools.exit.failure('No meta info available');
   }
-  const hook = new Discord.WebhookClient(process.env.WEBHOOK_ID, process.env.WEBHOOK_TOKEN);
-
-  await hook.send('', new Discord.RichEmbed({
+  const richEmbedConfig = {
     title: `__**New ${meta.projectName} Version: ${meta.releasedVersion}**__`,
     color: 6488161,
-    fields: [{
-      name: 'Changelog:',
-      value: meta.changelog.join('\n'),
-    }],
     url: meta.releaseUrl,
     timestamp: meta.createdAt,
     footer: {
@@ -25,7 +19,16 @@ Toolkit.run(async tools => {
       url: tools.arguments.authorUrl,
       icon: tools.arguments.authorIcon,
     },
-  }));
+  };
+  if (meta.changelog.length > 0) {
+    richEmbedConfig.fields = [{
+      name: 'Changelog:',
+      value: meta.changelog.join('\n'),
+    }];
+  }
+  const hook = new Discord.WebhookClient(process.env.WEBHOOK_ID, process.env.WEBHOOK_TOKEN);
+
+  await hook.send('', new Discord.RichEmbed(richEmbedConfig);
 
   tools.exit.success();
 });
