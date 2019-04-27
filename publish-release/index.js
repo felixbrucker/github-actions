@@ -1,16 +1,17 @@
 const { Toolkit } = require('actions-toolkit');
 
 Toolkit.run(async tools => {
-  const releasedVersion = tools.context.ref;
+  const semVerRegex = /([0-9]+.[0-9]+.[0-9]+)/;
+  const semVerRegexStart = /^([0-9]+.[0-9]+.[0-9]+)/;
+  const releasedVersion = tools.context.ref.match(semVerRegex)[1];
   const projectName = tools.getFile('README.md').split('\n')[0];
   tools.log(`Creating a release for ${projectName} ${releasedVersion}`);
-  const semVerRegex = /^[0-9]+.[0-9]+.[0-9]+/;
   const changelogFile = tools.getFile('CHANGELOG.md');
   const changelogLines = changelogFile.split('\n');
   let changelog = [];
   let startAddingChangelog = false;
   for (let line of changelogLines) {
-    if (line.match(semVerRegex)) {
+    if (line.match(semVerRegexStart)) {
       if (line.startsWith(releasedVersion)) {
         startAddingChangelog = true;
         continue;
