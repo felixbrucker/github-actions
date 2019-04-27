@@ -21,7 +21,6 @@ Toolkit.run(async tools => {
       value: meta.changelog.join('\n'),
     }];
   }
-  tools.log.debug(meta.createdAt);
   const hook = new Discord.WebhookClient(process.env.WEBHOOK_ID, process.env.WEBHOOK_TOKEN);
 
   await hook.send('', new Discord.RichEmbed(richEmbedConfig));
