@@ -16,6 +16,9 @@ Toolkit.run(async tools => {
         startAddingChangelog = true;
         continue;
       }
+      if (!startAddingChangelog) {
+        continue;
+      }
       break;
     }
     if (startAddingChangelog && line.startsWith('*')) {
