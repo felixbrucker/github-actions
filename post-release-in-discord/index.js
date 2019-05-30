@@ -7,7 +7,7 @@ Toolkit.run(async tools => {
     tools.exit.failure('No meta info available');
   }
   const richEmbedConfig = {
-    title: `__**New ${meta.projectName} Version: ${meta.releasedVersion}**__`,
+    title: `:mega: __**New ${meta.projectName} Version: ${meta.releasedVersion}**__`,
     color: 6488161,
     url: meta.releaseUrl,
     timestamp: meta.createdAt,
