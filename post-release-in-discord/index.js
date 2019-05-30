@@ -21,9 +21,14 @@ Toolkit.run(async tools => {
       value: meta.changelog.join('\n'),
     }];
   }
-  const hook = new Discord.WebhookClient(process.env.WEBHOOK_ID, process.env.WEBHOOK_TOKEN);
-
-  await hook.send('', new Discord.RichEmbed(richEmbedConfig));
+  const webhooks = Object.keys(process.env)
+    .filter(key => key.indexOf('DISCORD_WEBHOOK_ID') !== -1)
+    .map(id => [id, id.replace('_ID', '_TOKEN')])
+    .map(([id, token]) => [process.env[id], process.env[token]]);
+  for (let [id, token] of webhooks) {
+    const hook = new Discord.WebhookClient(id, token);
+    await hook.send('', new Discord.RichEmbed(richEmbedConfig));
+  }
 
   tools.exit.success();
 });
