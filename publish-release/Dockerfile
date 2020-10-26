@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:12-alpine
 
 # Labels for GitHub to read your action
 LABEL "com.github.actions.name"="Publish release"
